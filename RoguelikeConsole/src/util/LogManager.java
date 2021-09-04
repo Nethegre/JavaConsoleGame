@@ -40,7 +40,7 @@ public class LogManager {
 
         try
         {
-            File logFile = new File(config.getConfigValue(logFileName));
+            File logFile = new File(logFileName);
             if (logFile.exists())
             {
                 //Don't create the log file because it exists already
@@ -87,7 +87,7 @@ public class LogManager {
         {
             try
             {
-                FileWriter logWriter = new FileWriter(config.getConfigValue(logFileName));
+                FileWriter logWriter = new FileWriter(logFileName);
                 logWriter.write(msg);
                 logWriter.close();
                 success = true;
