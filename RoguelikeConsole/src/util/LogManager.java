@@ -3,22 +3,25 @@ package util;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class LogManager {
 
     private final String methodName;
     private final String className;
+    private final UUID uuid;
     private static final ConfigManager config = new ConfigManager();
     private boolean setupSuccessful = false;
     private final String logFileName;
 
-    public LogManager() {
+    public LogManager(UUID uuid) {
 
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         StackTraceElement element = stackTrace[2];
 
         this.methodName = element.getMethodName();
         this.className = element.getClassName();
+        this.uuid = uuid;
 
         //Populate the log file name from the configManager
         logFileName = config.getConfigValue("LOGFILENAME");
@@ -102,29 +105,29 @@ public class LogManager {
 
     public void info(String msg)
     {
-        //General log format: [<timestamp>] <Log level> <class name>.<method name> - [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] INFO " + className + "." + methodName + " - [" + msg + "]" ;
+        //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
+        String formattedMessage = "[" + LocalDateTime.now() + "] INFO " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
         writeToLogFile(formattedMessage);
     }
 
     public void warn(String msg)
     {
-        //General log format: [<timestamp>] <Log level> <class name>.<method name> - [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] WARN " + className + "." + methodName + " - [" + msg + "]" ;
+        //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
+        String formattedMessage = "[" + LocalDateTime.now() + "] WARN " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
         writeToLogFile(formattedMessage);
     }
 
     public void error(String msg)
     {
-        //General log format: [<timestamp>] <Log level> <class name>.<method name> - [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] ERROR " + className + "." + methodName + " - [" + msg + "]" ;
+        //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
+        String formattedMessage = "[" + LocalDateTime.now() + "] ERROR " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
         writeToLogFile(formattedMessage);
     }
 
     public void debug(String msg)
     {
-        //General log format: [<timestamp>] <Log level> <class name>.<method name> - [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] DEBUG " + className + "." + methodName + " - [" + msg + "]" ;
+        //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
+        String formattedMessage = "[" + LocalDateTime.now() + "] DEBUG " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
         writeToLogFile(formattedMessage);
     }
 
