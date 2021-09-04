@@ -14,14 +14,28 @@ public class GUI {
         //Text pane to display game map
         mapTextPane = new JTextPane();
         mapTextPane.setEditable(false);
-        mapTextPane.setBounds(0,0,300,300);
+        mapTextPane.setFont(new Font("monospaced", Font.PLAIN, 16));
+        mapTextPane.setBounds(0,0,100*mapTextPane.getFont().getSize(),100*mapTextPane.getFont().getSize());
         mapTextPane.setBackground(Color.BLACK);
         frame.add(mapTextPane);
 
         //JFrame window settings - has to happen last
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //So program actually stops when X is clicked
-        frame.setSize(320,350);
+        frame.setSize(mapTextPane.getWidth()+20,mapTextPane.getHeight()+50);
         frame.setLayout(null);
         frame.setVisible(true);
+    }
+
+    public void updateMap(char[][] gameMap) {
+        String newMap = "";
+
+        for (int i = 0; i < 300; i++) {
+            for (int j = 0; j < 300; j++) {
+                newMap += gameMap[i][j];
+            }
+            newMap += '\n';
+        }
+
+        mapTextPane.setText(newMap);
     }
 }
