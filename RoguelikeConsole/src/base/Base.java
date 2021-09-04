@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public class Base {
 
-    private UUID id;
-    private LogManager log = new LogManager();
+    protected UUID id = UUID.randomUUID();
+    protected LogManager log = new LogManager(id);
 
 
 }
