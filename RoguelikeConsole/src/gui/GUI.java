@@ -43,7 +43,7 @@ public class GUI {
     public void updateMap(char[][] gameMap) {
         String newMap = "";
 
-        gameMap[mockedPlayer.getY()][mockedPlayer.getX()] = '@';
+        gameMap[mockedPlayer.getyCoordinate()][mockedPlayer.getxCoordinate()] = '@';
 
         for (int i = 0; i < gameMap.length; i++) {
             for (int j = 0; j < gameMap[i].length; j++) {

@@ -12,6 +12,7 @@ public class LogManager {
     private final UUID uuid;
     private static final ConfigManager config = new ConfigManager();
     private boolean setupSuccessful = false;
+    private final boolean writeToConsole;
     private final String logFileName;
 
     public LogManager(UUID uuid) {
@@ -25,6 +26,7 @@ public class LogManager {
 
         //Populate the log file name from the configManager
         logFileName = config.getConfigValue("LOGFILENAME");
+        writeToConsole = config.getConfigValue("WRITETOCONSOLE").equals("true");
 
         if (setupLogFile())
         {
@@ -45,7 +47,7 @@ public class LogManager {
             {
                 //Don't create the log file because it exists already
                 alreadyExists = true;
-                System.out.println("[LogManager.setupLogFile] Log file exists already, continuing.");
+                //System.out.println("[LogManager.setupLogFile] Log file exists already, continuing.");
             }
             else
             {
@@ -103,31 +105,40 @@ public class LogManager {
         return success;
     }
 
+    private void writeToConsole(String msg)
+    {
+        //Write to console if the config value is set
+        if (writeToConsole)
+        {
+            System.out.println(msg);
+        }
+    }
+
     public void info(String msg)
     {
         //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] INFO " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
+        String formattedMessage = "[" + LocalDateTime.now() + "] INFO " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]\r\n" ;
         writeToLogFile(formattedMessage);
     }
 
     public void warn(String msg)
     {
         //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] WARN " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
+        String formattedMessage = "[" + LocalDateTime.now() + "] WARN " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]\r\n" ;
         writeToLogFile(formattedMessage);
     }
 
     public void error(String msg)
     {
         //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] ERROR " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
+        String formattedMessage = "[" + LocalDateTime.now() + "] ERROR " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]\r\n" ;
         writeToLogFile(formattedMessage);
     }
 
     public void debug(String msg)
     {
         //General log format: [<timestamp>] <Log level> <class name>.<method name> "<uuid>" [<message>]
-        String formattedMessage = "[" + LocalDateTime.now() + "] DEBUG " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]" ;
+        String formattedMessage = "[" + LocalDateTime.now() + "] DEBUG " + className + "." + methodName + " \"" + uuid + "\" [" + msg + "]\r\n" ;
         writeToLogFile(formattedMessage);
     }
 
