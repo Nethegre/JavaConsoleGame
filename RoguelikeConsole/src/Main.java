@@ -1,29 +1,21 @@
 import gui.GUI;
+import gui.GameMap;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         GUI gui = new GUI();
         gui.init();
 
-        char[][] gameMap = new char[300][300];
+        GameMap gameMap = new GameMap();
 
-        for (int i = 0; i < 300; i++) {
-            Arrays.fill(gameMap[i], '.');
-        }
-
-        for (int i = 0; i < 20; i++) {
-            gameMap[i][0] = '#';
-            gameMap[0][i] = '#';
-            gameMap[i][19] = '#';
-            gameMap[19][i] = '#';
-        }
-
-        gui.updateMap(gameMap);
+        gameMap.init();
+        gameMap.testLoop(gui, true, true);
     }
 }

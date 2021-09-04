@@ -14,8 +14,9 @@ public class GUI {
         //Text pane to display game map
         mapTextPane = new JTextPane();
         mapTextPane.setEditable(false);
-        mapTextPane.setFont(new Font("monospaced", Font.PLAIN, 16));
+        mapTextPane.setFont(new Font("monospaced", Font.PLAIN, 14));
         mapTextPane.setBounds(0,0,100*mapTextPane.getFont().getSize(),100*mapTextPane.getFont().getSize());
+        mapTextPane.setForeground(Color.WHITE);
         mapTextPane.setBackground(Color.BLACK);
         frame.add(mapTextPane);
 
@@ -29,8 +30,8 @@ public class GUI {
     public void updateMap(char[][] gameMap) {
         String newMap = "";
 
-        for (int i = 0; i < 300; i++) {
-            for (int j = 0; j < 300; j++) {
+        for (int i = 0; i < gameMap.length; i++) {
+            for (int j = 0; j < gameMap[i].length; j++) {
                 newMap += gameMap[i][j];
             }
             newMap += '\n';
