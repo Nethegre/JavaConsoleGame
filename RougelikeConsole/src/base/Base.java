@@ -8,6 +8,6 @@ public class Base {
 
     private UUID id;
     private LogManager log = new LogManager();
-    
+
 
 }
