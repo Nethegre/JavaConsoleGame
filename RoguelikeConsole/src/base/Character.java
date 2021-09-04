@@ -9,7 +9,7 @@ public class Character extends Entity {
 
     protected Hashtable<Enum.ArmorLocation, InventoryEntry> armorInventory = new Hashtable<>();
     protected Move move;
-    public boolean supportsArmor;
+    protected boolean supportsArmor;
 
     public void move(int direction)
     {
@@ -122,4 +122,30 @@ public class Character extends Entity {
         return success;
     }
 
+    public Hashtable<Enum.ArmorLocation, InventoryEntry> getArmorInventory() {
+        return armorInventory;
+    }
+
+    public void addToArmorInventory(Enum.ArmorLocation location) {
+        if (armorInventory.containsKey(location))
+        {
+            log.warn("Attempt to add armor location " + location + " that already exists for character.");
+        }
+        else
+        {
+            armorInventory.put(location, new InventoryEntry(0, null));
+        }
+    }
+
+    public void setMove(Move move) {
+        this.move = move;
+    }
+
+    public boolean isSupportsArmor() {
+        return supportsArmor;
+    }
+
+    public void setSupportsArmor(boolean supportsArmor) {
+        this.supportsArmor = supportsArmor;
+    }
 }

@@ -8,7 +8,7 @@ public class Entity extends Base {
 
     protected double baseHealth;
     protected double baseArmor;
-    public boolean damageable;
+    protected boolean damageable;
     protected int inventorySize;
     protected Hashtable<Integer, InventoryEntry> inventory = new Hashtable<>();
     protected Damage damage;
@@ -90,6 +90,42 @@ public class Entity extends Base {
     public void takeDamage(double amount, Weapon weapon)
     {
         damage.damage(this, amount, weapon);
+    }
+
+    public double getBaseHealth() {
+        return baseHealth;
+    }
+
+    public void setBaseHealth(double baseHealth) {
+        this.baseHealth = baseHealth;
+    }
+
+    public double getBaseArmor() {
+        return baseArmor;
+    }
+
+    public void setBaseArmor(double baseArmor) {
+        this.baseArmor = baseArmor;
+    }
+
+    public boolean isDamageable() {
+        return damageable;
+    }
+
+    public void setDamageable(boolean damageable) {
+        this.damageable = damageable;
+    }
+
+    public int getInventorySize() {
+        return inventorySize;
+    }
+
+    public void setInventorySize(int inventorySize) {
+        this.inventorySize = inventorySize;
+    }
+
+    public void setDamage(Damage damage) {
+        this.damage = damage;
     }
 
 }
