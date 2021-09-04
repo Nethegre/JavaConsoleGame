@@ -72,10 +72,7 @@ public class LogManager {
         }
         else
         {
-            if (createdNew)
-                return true;
-            else
-                return false;
+            return createdNew;
         }
     }
 
