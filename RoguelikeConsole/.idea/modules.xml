@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RougelikeConsole.iml" filepath="$PROJECT_DIR$/RougelikeConsole.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RoguelikeConsole.iml" filepath="$PROJECT_DIR$/RoguelikeConsole.iml" />
     </modules>
   </component>
 </project>

@@ -55,7 +55,7 @@ cmake-build-*/
 *.iws
 
 # IntelliJ
-RougelikeConsole/out/
+RoguelikeConsole/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
