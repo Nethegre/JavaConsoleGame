@@ -6,4 +6,5 @@ public class Base {
 
     private UUID id;
 
+
 }
