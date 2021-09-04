@@ -1,5 +1,7 @@
 package base;
 
+import component.Damage;
+
 import java.util.Hashtable;
 
 public class Entity extends Base {
@@ -9,6 +11,7 @@ public class Entity extends Base {
     public boolean damageable;
     protected int inventorySize;
     protected Hashtable<Integer, InventoryEntry> inventory = new Hashtable<>();
+    protected Damage damage;
 
     public boolean tryAddToInventory(Item item, double count, double remainder)
     {
@@ -82,6 +85,11 @@ public class Entity extends Base {
             log.warn("Failed to remove items from inventory slot because it was already empty.");
             return false;
         }
+    }
+
+    public void takeDamage(double amount, Weapon weapon)
+    {
+        damage.damage(this, amount, weapon);
     }
 
 }
