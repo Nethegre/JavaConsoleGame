@@ -1,21 +1,21 @@
 package core.SwingActions;
 
-import mocks.MockedPlayer;
+import base.Character;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class MoveAction extends AbstractAction {
-    private MockedPlayer mockedPlayer;
+    private Character character;
     private int xOffset, yOffset;
 
-    public MoveAction(MockedPlayer mockedPlayer, int xOffset, int yOffset) {
-        this.mockedPlayer = mockedPlayer;
+    public MoveAction(Character character, int xOffset, int yOffset) {
+        this.character = character;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
     }
 
     public void actionPerformed(ActionEvent e) {
-        mockedPlayer.move(xOffset, yOffset);
+        character.move(xOffset, yOffset);
     }
 }

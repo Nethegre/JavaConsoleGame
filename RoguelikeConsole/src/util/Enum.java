@@ -1,5 +1,7 @@
 package util;
 
+import java.awt.*;
+
 public class Enum {
 
     public enum ArmorLocation {
@@ -15,7 +17,24 @@ public class Enum {
     }
 
     public enum DisplayColor {
-        BLUE, GREEN, YELLOW, ORANGE, RED, BLACK, WHITE, GRAY, PURPLE
+        BLUE (Color.blue),
+        GREEN (Color.GREEN),
+        YELLOW (Color.yellow),
+        ORANGE (Color.orange),
+        RED (Color.red),
+        BLACK (Color.black),
+        WHITE (Color.white),
+        GRAY (Color.gray),
+        CYAN (Color.cyan);
+
+        private final Color color;
+        DisplayColor(Color color) {
+            this.color = color;
+        }
+
+        public Color getColor() {
+            return color;
+        }
     }
 
 }
