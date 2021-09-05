@@ -1,6 +1,6 @@
 package gui;
 
-import gui.SwingActions.moveAction;
+import gui.SwingActions.MoveAction;
 import mocks.MockedPlayer;
 
 import javax.swing.*;
@@ -56,7 +56,32 @@ public class GUI {
     }
 
     private void initKeybinds() {
-        mapTextPane.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("UP"), "moveUp");
-        mapTextPane.getActionMap().put("moveUp", new moveAction(mockedPlayer, 0, -1));
+        /*mapTextPane.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("UP"), "moveUp");
+        mapTextPane.getActionMap().put("moveUp", new MoveAction(mockedPlayer, 0, -1));*/
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("UP"), "moveUp", new MoveAction(mockedPlayer, 0, -1));
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("DOWN"), "moveDown", new MoveAction(mockedPlayer, 0, 1));
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("LEFT"), "moveLeft", new MoveAction(mockedPlayer, -1, 0));
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("RIGHT"), "moveRight", new MoveAction(mockedPlayer, 1, 0));
+    }
+
+    //TODO Add some kind of validation and error/exception to throw if condition is not 0-2
+    private void newKeybindAndAction(JComponent jComponent, int condition, KeyStroke keyStroke, String actionMapKey, Action action) {
+        /*
+            int condition:
+            JComponent.WHEN_FOCUSED = 0 -- Default for getInputMap()
+            JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT = 1
+            JComponent.WHEN_IN_FOCUSED_WINDOW = 2
+        */
+        newKeybind(jComponent, condition, keyStroke, actionMapKey);
+        jComponent.getActionMap().put(actionMapKey, action);
+    }
+
+    private void newKeybindAndAction(JComponent jComponent, KeyStroke keyStroke, String actionMapKey, Action action) {
+        newKeybind(jComponent, JComponent.WHEN_FOCUSED, keyStroke, actionMapKey);
+        jComponent.getActionMap().put(actionMapKey, action);
+    }
+
+    private void newKeybind(JComponent jComponent, int condition, KeyStroke keyStroke, String actionMapKey) {
+        jComponent.getInputMap(condition).put(keyStroke, actionMapKey);
     }
 }

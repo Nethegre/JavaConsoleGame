@@ -1,9 +1,6 @@
 import gui.GUI;
 import gui.GameMap;
-import gui.SwingActions.moveAction;
 import mocks.MockedPlayer;
-
-import javax.swing.*;
 
 public class Main {
 

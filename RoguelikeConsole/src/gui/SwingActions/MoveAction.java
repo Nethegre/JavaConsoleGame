@@ -5,11 +5,11 @@ import mocks.MockedPlayer;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class moveAction extends AbstractAction {
+public class MoveAction extends AbstractAction {
     private MockedPlayer mockedPlayer;
     private int xOffset, yOffset;
 
-    public moveAction(MockedPlayer mockedPlayer, int xOffset, int yOffset) {
+    public MoveAction(MockedPlayer mockedPlayer, int xOffset, int yOffset) {
         this.mockedPlayer = mockedPlayer;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
