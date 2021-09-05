@@ -1,8 +1,10 @@
 package core;
 
+import base.Entity;
 import mocks.MockedPlayer;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Game {
 
@@ -10,6 +12,7 @@ public class Game {
     private GameMap gameMap;
     private MockedPlayer mockedPlayer;
     private JTextPane mapTextPane;
+    private ArrayList<Entity> entities = new ArrayList<>();
 
     public Game() {
         mockedPlayer = new MockedPlayer();
@@ -39,17 +42,24 @@ public class Game {
 
         boolean shouldLoop = true;
 
-        do {
+        /*do {
             gui.generateMapBase(gameMap.gameMap);
             gui.addEntityToMap(mockedPlayer);
             gui.drawMap();
+        } while (shouldLoop);*/
+        gui.generateMapBase_DocumentVersion(gameMap.gameMap);
+        entities.add(mockedPlayer);
+        do {
+            updateEntities();
         } while (shouldLoop);
     }
 
-    private void drawEntitiesOnMap() {
-        String mapString = mapTextPane.getText();
-        int position = mockedPlayer.getxCoordinate() * 100 + mockedPlayer.getxCoordinate();
-        mapString.toCharArray()[position] = '@';
-        mapTextPane.setText(mapString);
+    private void updateEntities() {
+        for (Entity entity: entities) {
+            if (entity.needsUpdating) {
+                entity.needsUpdating = false;
+                gui.updateEntityOnMap_DocumentVersion(mockedPlayer, gameMap.gameMap);
+            }
+        }
     }
 }

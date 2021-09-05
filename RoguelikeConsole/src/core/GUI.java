@@ -1,10 +1,14 @@
 package core;
 
+import base.Entity;
 import core.SwingActions.MoveAction;
 import mocks.MockedPlayer;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 
 public class GUI {
@@ -13,6 +17,7 @@ public class GUI {
     private JTextPane mapTextPane;
     private String mapBase, mapWithEntities;
     private Document mapDocument;
+    private SimpleAttributeSet playerAttributeSet;
 
     /* keybind stuff */
     MockedPlayer mockedPlayer;
@@ -20,6 +25,7 @@ public class GUI {
     public GUI(MockedPlayer mockedPlayer) {
         this.mockedPlayer = mockedPlayer;
         init();
+        mapDocument = mapTextPane.getDocument();
     }
     /* end keybind stuff */
 
@@ -33,6 +39,7 @@ public class GUI {
         mapTextPane.setBounds(0,0,100*mapTextPane.getFont().getSize(),100*mapTextPane.getFont().getSize());
         mapTextPane.setForeground(Color.WHITE);
         mapTextPane.setBackground(Color.BLACK);
+        mapTextPane.setHighlighter(null); //Game would crash if anything was highlighted
         mainFrame.add(mapTextPane);
 
         //JFrame window settings - has to happen last
@@ -42,6 +49,9 @@ public class GUI {
         mainFrame.setVisible(true);
 
         initKeybinds();
+
+        playerAttributeSet = new SimpleAttributeSet();
+        StyleConstants.setForeground(playerAttributeSet, Color.cyan);
     }
 
     public void generateMapBase(char[][] gameMap) {
@@ -59,6 +69,33 @@ public class GUI {
         mapWithEntities = mapBase;
         int position = mockedPlayer.getyCoordinate() * 101 + mockedPlayer.getxCoordinate();
         mapWithEntities = mapWithEntities.substring(0, position) + '@' + mapWithEntities.substring(position+1);
+    }
+
+    public void generateMapBase_DocumentVersion(char[][] gameMap) {
+        mapBase = "";
+
+        for (int i = 0; i < gameMap.length; i++) {
+            for (int j = 0; j < gameMap[i].length; j++) {
+                mapBase += gameMap[i][j];
+            }
+            mapBase += '\n';
+        }
+
+        mapTextPane.setText(mapBase);
+    }
+
+    public void updateEntityOnMap_DocumentVersion(Entity entity, char[][] gameMap) {
+        int prevPosition = entity.getPrevYCoordinate() * 101 + entity.getPrevXCoordinate();
+        try {
+            mapDocument.remove(prevPosition, 1);
+            mapDocument.insertString(prevPosition, Character.toString(gameMap[entity.getPrevYCoordinate()][entity.getPrevXCoordinate()]), null);
+
+            int newPosition = entity.getyCoordinate() * 101 + entity.getxCoordinate();
+            mapDocument.remove(newPosition, 1);
+            mapDocument.insertString(newPosition, "@", playerAttributeSet);
+        } catch (BadLocationException ex) {
+            //TODO Probably should add this to logging
+        }
     }
 
     public void drawMap() {
