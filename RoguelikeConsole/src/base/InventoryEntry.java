@@ -2,7 +2,7 @@ package base;
 
 public class InventoryEntry extends Base {
 
-    public double count;
+    protected double count;
     protected Item item;
 
     public InventoryEntry(double count, Item item)
@@ -73,4 +73,15 @@ public class InventoryEntry extends Base {
         }
     }
 
+    public double getCount() {
+        return count;
+    }
+
+    public void setCount(double count) {
+        this.count = count;
+    }
+
+    public Item getItem() {
+        return item;
+    }
 }

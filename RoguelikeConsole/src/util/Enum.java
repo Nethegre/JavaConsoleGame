@@ -10,4 +10,8 @@ public class Enum {
         DEBUG, INFO, WARN, ERROR
     }
 
+    public enum WeaponTypes {
+        LIGHT, HEAVY, AVERAGE, MENTAL
+    }
+
 }

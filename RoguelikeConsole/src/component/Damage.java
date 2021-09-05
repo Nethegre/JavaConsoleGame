@@ -6,7 +6,7 @@ import base.Weapon;
 
 public class Damage extends Base {
 
-    public void damage(Entity e, double dmgAmount, Weapon weapon)
+    public void damage(Entity attacking, Entity takingDmg, int attackTimes, Weapon weapon)
     {
 
     }
