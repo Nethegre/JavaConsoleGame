@@ -57,5 +57,5 @@ public class RangedAttackUse extends Use {
             ex.printStackTrace();
         }
     }
-    
+
 }
