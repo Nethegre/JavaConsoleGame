@@ -1,40 +1,31 @@
 package core;
 
+import base.Character;
 import base.Entity;
-import mocks.MockedPlayer;
+import util.Spawner;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class Game {
 
     private GUI gui;
     private GameMap gameMap;
-    private MockedPlayer mockedPlayer;
-    private JTextPane mapTextPane;
+    private Spawner spawner = new Spawner();
     private ArrayList<Entity> entities = new ArrayList<>();
 
     public Game() {
-        mockedPlayer = new MockedPlayer();
-        gui = new GUI(mockedPlayer);
+        Character playerCharacter = spawnCharacter("player", 3, 3);
+        gui = new GUI(playerCharacter);
         gameMap = new GameMap();
     }
 
-    public Game(GUI gui, GameMap gameMap, MockedPlayer mockedPlayer) {
+    public Game(GUI gui, GameMap gameMap) {
         this.gui = gui;
         this.gameMap = gameMap;
-        this.mockedPlayer = mockedPlayer;
     }
 
     public void init() {
-        mockedPlayer.setCoordinates(3,3);
         gameMap.init();
-        mapTextPane = gui.getMapTextPane();
-    }
-
-    public void testLoop() throws InterruptedException {
-        init();
-        gameMap.testLoop(gui, true, false, false);
     }
 
     public void gameLoop() throws InterruptedException {
@@ -42,15 +33,13 @@ public class Game {
 
         boolean shouldLoop = true;
 
-        /*do {
-            gui.generateMapBase(gameMap.gameMap);
-            gui.addEntityToMap(mockedPlayer);
-            gui.drawMap();
-        } while (shouldLoop);*/
         gui.generateMapBase_DocumentVersion(gameMap.gameMap);
-        entities.add(mockedPlayer);
+        spawnCharacter("zombie", 5, 10);
+        /*int cycleCount = 0;*/
         do {
             updateEntities();
+            /*cycleCount++;
+            gui.setJFrameTitle(Integer.toString(cycleCount));*/
         } while (shouldLoop);
     }
 
@@ -58,8 +47,29 @@ public class Game {
         for (Entity entity: entities) {
             if (entity.isNeedsUpdating()) {
                 entity.setNeedsUpdating(false);
-                gui.updateEntityOnMap_DocumentVersion(mockedPlayer, gameMap.gameMap);
+                gui.updateEntityOnMap_DocumentVersion(entity, gameMap.gameMap);
             }
         }
+    }
+
+    private Character spawnCharacter(String whatToSpawn, int x, int y) {
+        Character character = null;
+        switch (whatToSpawn) {
+            case "player":
+                character = spawner.createPlayerCharacter(x, y);
+                break;
+            case "zombie":
+                character = spawner.createZombie();
+                character.setCoordinates(x, y);
+                character.setPrevCoordinates(x, y);
+                break;
+            default:
+                //TODO add log to say nothing spawned
+                break;
+        }
+        if (character != null) {
+            entities.add(character);
+        }
+        return character;
     }
 }

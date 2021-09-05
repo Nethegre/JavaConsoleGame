@@ -16,24 +16,6 @@ public class GameMap {
         makeRoom(28,2, 34,8);
     }
 
-    public void testLoop(GUI gui, boolean shouldLoop, boolean shouldRandom, boolean shouldSleep) throws InterruptedException {
-        int prevRandomInt = 1;
-
-        do {
-            if (shouldRandom) {
-                int randomInt = ThreadLocalRandom.current().nextInt(1, 19); //generate random number between 1 and 19 exclusive (so between 1-18)
-                gameMap[prevRandomInt][prevRandomInt] = '.';
-                gameMap[randomInt][randomInt] = '@';
-                prevRandomInt = randomInt;
-            }
-
-            gui.generateMapBase(gameMap);
-            if (shouldSleep) {
-                Thread.sleep(2000);
-            }
-        } while (shouldLoop);
-    }
-
     public void makeRoom(int topLeftCornerX, int topLeftCornerY, int bottomRightCornerX, int bottomRightCornerY) {
         for (int i = topLeftCornerY; i <= bottomRightCornerY; i++) {
             for (int j = topLeftCornerX; j <= bottomRightCornerX; j++) {

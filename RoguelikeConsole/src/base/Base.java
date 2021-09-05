@@ -3,6 +3,8 @@ package base;
 import util.Enum;
 import util.LogManager;
 
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.util.UUID;
 
 public class Base {
@@ -14,7 +16,7 @@ public class Base {
     protected int prevXCoordinate = 0;
     protected int prevYCoordinate = 0;
     protected char displayCharacter;
-    protected Enum.DisplayColor displayColor;
+    protected Enum.DisplayColor displayColor = Enum.DisplayColor.WHITE;
 
     public void setCoordinates(int x, int y) {
         xCoordinate = x;
@@ -78,4 +80,10 @@ public class Base {
         this.displayColor = displayColor;
     }
 
+    public SimpleAttributeSet getAttributeSet() {
+        SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+        StyleConstants.setForeground(attributeSet, displayColor.getColor());
+
+        return attributeSet;
+    }
 }

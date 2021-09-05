@@ -1,5 +1,6 @@
 package core;
 
+import base.Character;
 import base.Entity;
 import core.SwingActions.MoveAction;
 import mocks.MockedPlayer;
@@ -15,21 +16,23 @@ public class GUI {
 
     private JFrame mainFrame;
     private JTextPane mapTextPane;
-    private String mapBase, mapWithEntities;
+    private String mapBase;
     private Document mapDocument;
     private SimpleAttributeSet playerAttributeSet;
 
     /* keybind stuff */
-    MockedPlayer mockedPlayer;
+    Character playerCharacter;
 
-    public GUI(MockedPlayer mockedPlayer) {
-        this.mockedPlayer = mockedPlayer;
-        init();
+    public GUI(Character character) {
+        this.playerCharacter = character;
+        init(character);
         mapDocument = mapTextPane.getDocument();
     }
     /* end keybind stuff */
 
-    private void init() {
+    private void init(Character playerCharacter) {
+        this.playerCharacter = playerCharacter;
+
         mainFrame = new JFrame();
 
         //Text pane to display game map
@@ -54,23 +57,6 @@ public class GUI {
         StyleConstants.setForeground(playerAttributeSet, Color.cyan);
     }
 
-    public void generateMapBase(char[][] gameMap) {
-        mapBase = "";
-
-        for (int i = 0; i < gameMap.length; i++) {
-            for (int j = 0; j < gameMap[i].length; j++) {
-                mapBase += gameMap[i][j];
-            }
-            mapBase += '\n';
-        }
-    }
-
-    public void addEntityToMap(MockedPlayer mockedPlayer) {
-        mapWithEntities = mapBase;
-        int position = mockedPlayer.getyCoordinate() * 101 + mockedPlayer.getxCoordinate();
-        mapWithEntities = mapWithEntities.substring(0, position) + '@' + mapWithEntities.substring(position+1);
-    }
-
     public void generateMapBase_DocumentVersion(char[][] gameMap) {
         mapBase = "";
 
@@ -88,25 +74,21 @@ public class GUI {
         int prevPosition = entity.getPrevYCoordinate() * 101 + entity.getPrevXCoordinate();
         try {
             mapDocument.remove(prevPosition, 1);
-            mapDocument.insertString(prevPosition, Character.toString(gameMap[entity.getPrevYCoordinate()][entity.getPrevXCoordinate()]), null);
+            mapDocument.insertString(prevPosition, String.valueOf(gameMap[entity.getPrevYCoordinate()][entity.getPrevXCoordinate()]), null);
 
             int newPosition = entity.getyCoordinate() * 101 + entity.getxCoordinate();
             mapDocument.remove(newPosition, 1);
-            mapDocument.insertString(newPosition, "@", playerAttributeSet);
+            mapDocument.insertString(newPosition, String.valueOf(entity.getDisplayCharacter()), entity.getAttributeSet());
         } catch (BadLocationException ex) {
             //TODO Probably should add this to logging
         }
     }
 
-    public void drawMap() {
-        mapTextPane.setText(mapWithEntities);
-    }
-
     private void initKeybinds() {
-        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("UP"), "moveUp", new MoveAction(mockedPlayer, 0, -1));
-        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("DOWN"), "moveDown", new MoveAction(mockedPlayer, 0, 1));
-        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("LEFT"), "moveLeft", new MoveAction(mockedPlayer, -1, 0));
-        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("RIGHT"), "moveRight", new MoveAction(mockedPlayer, 1, 0));
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("UP"), "moveUp", new MoveAction(playerCharacter, 0, -1));
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("DOWN"), "moveDown", new MoveAction(playerCharacter, 0, 1));
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("LEFT"), "moveLeft", new MoveAction(playerCharacter, -1, 0));
+        newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("RIGHT"), "moveRight", new MoveAction(playerCharacter, 1, 0));
     }
 
     //TODO Add some kind of validation and error/exception to throw if condition is not 0-2
@@ -132,5 +114,9 @@ public class GUI {
 
     public JTextPane getMapTextPane() {
         return mapTextPane;
+    }
+
+    public void setJFrameTitle(String title) {
+        mainFrame.setTitle("Cycles: " + title);
     }
 }

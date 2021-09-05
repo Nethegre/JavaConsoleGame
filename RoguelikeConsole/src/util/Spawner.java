@@ -26,4 +26,24 @@ public class Spawner extends Base {
 
         return zombie;
     }
+
+    public Character createPlayerCharacter(int x, int y) {
+        Character player = new Character();
+        player.setSupportsArmor(true);
+        player.setDamageable(true);
+        player.setBaseArmor(0);
+        player.setBaseHealth(10);
+        player.setMove(new Move());
+        player.setDamage(new CharacterDamage());
+        player.addToArmorInventory(Enum.ArmorLocation.CHEST);
+        player.addToArmorInventory(Enum.ArmorLocation.LEGS);
+        player.addToArmorInventory(Enum.ArmorLocation.SHOES);
+        player.addToArmorInventory(Enum.ArmorLocation.HAT);
+        player.setDisplayCharacter('@');
+        player.setDisplayColor(Enum.DisplayColor.CYAN);
+        player.setCoordinates(x, y);
+        player.setPrevCoordinates(x, y);
+
+        return player;
+    }
 }
