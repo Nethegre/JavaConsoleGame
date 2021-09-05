@@ -1,4 +1,4 @@
-package gui.SwingActions;
+package core.SwingActions;
 
 import mocks.MockedPlayer;
 

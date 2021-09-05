@@ -1,25 +1,29 @@
-package gui;
+package core;
 
-import gui.SwingActions.MoveAction;
+import core.SwingActions.MoveAction;
 import mocks.MockedPlayer;
 
 import javax.swing.*;
+import javax.swing.text.Document;
 import java.awt.*;
 
 public class GUI {
 
     private JFrame mainFrame;
     private JTextPane mapTextPane;
+    private String mapBase, mapWithEntities;
+    private Document mapDocument;
 
     /* keybind stuff */
     MockedPlayer mockedPlayer;
 
     public GUI(MockedPlayer mockedPlayer) {
         this.mockedPlayer = mockedPlayer;
+        init();
     }
     /* end keybind stuff */
 
-    public void init() {
+    private void init() {
         mainFrame = new JFrame();
 
         //Text pane to display game map
@@ -40,24 +44,28 @@ public class GUI {
         initKeybinds();
     }
 
-    public void updateMap(char[][] gameMap) {
-        String newMap = "";
-
-        gameMap[mockedPlayer.getyCoordinate()][mockedPlayer.getxCoordinate()] = '@';
+    public void generateMapBase(char[][] gameMap) {
+        mapBase = "";
 
         for (int i = 0; i < gameMap.length; i++) {
             for (int j = 0; j < gameMap[i].length; j++) {
-                newMap += gameMap[i][j];
+                mapBase += gameMap[i][j];
             }
-            newMap += '\n';
+            mapBase += '\n';
         }
+    }
 
-        mapTextPane.setText(newMap);
+    public void addEntityToMap(MockedPlayer mockedPlayer) {
+        mapWithEntities = mapBase;
+        int position = mockedPlayer.getyCoordinate() * 101 + mockedPlayer.getxCoordinate();
+        mapWithEntities = mapWithEntities.substring(0, position) + '@' + mapWithEntities.substring(position+1);
+    }
+
+    public void drawMap() {
+        mapTextPane.setText(mapWithEntities);
     }
 
     private void initKeybinds() {
-        /*mapTextPane.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke("UP"), "moveUp");
-        mapTextPane.getActionMap().put("moveUp", new MoveAction(mockedPlayer, 0, -1));*/
         newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("UP"), "moveUp", new MoveAction(mockedPlayer, 0, -1));
         newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("DOWN"), "moveDown", new MoveAction(mockedPlayer, 0, 1));
         newKeybindAndAction(mapTextPane, KeyStroke.getKeyStroke("LEFT"), "moveLeft", new MoveAction(mockedPlayer, -1, 0));
@@ -83,5 +91,9 @@ public class GUI {
 
     private void newKeybind(JComponent jComponent, int condition, KeyStroke keyStroke, String actionMapKey) {
         jComponent.getInputMap(condition).put(keyStroke, actionMapKey);
+    }
+
+    public JTextPane getMapTextPane() {
+        return mapTextPane;
     }
 }
