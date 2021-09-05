@@ -56,8 +56,8 @@ public class Game {
 
     private void updateEntities() {
         for (Entity entity: entities) {
-            if (entity.needsUpdating) {
-                entity.needsUpdating = false;
+            if (entity.isNeedsUpdating()) {
+                entity.setNeedsUpdating(false);
                 gui.updateEntityOnMap_DocumentVersion(mockedPlayer, gameMap.gameMap);
             }
         }

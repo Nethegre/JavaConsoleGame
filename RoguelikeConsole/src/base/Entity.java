@@ -12,7 +12,7 @@ public class Entity extends Base {
     protected int inventorySize;
     protected Hashtable<Integer, InventoryEntry> inventory = new Hashtable<>();
     protected Damage damage;
-    public boolean needsUpdating = true;
+    protected boolean needsUpdating = true;
 
     public boolean tryAddToInventory(Item item, double count, double remainder)
     {
@@ -127,6 +127,14 @@ public class Entity extends Base {
 
     public void setDamage(Damage damage) {
         this.damage = damage;
+    }
+
+    public boolean isNeedsUpdating() {
+        return needsUpdating;
+    }
+
+    public void setNeedsUpdating(boolean needsUpdating) {
+        this.needsUpdating = needsUpdating;
     }
 
 }
