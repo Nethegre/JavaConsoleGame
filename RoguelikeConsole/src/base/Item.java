@@ -4,6 +4,8 @@ import component.Degrade;
 import component.Drop;
 import component.Use;
 
+import java.util.List;
+
 public class Item extends Base {
 
     public String displayName;
@@ -36,9 +38,9 @@ public class Item extends Base {
         degradeAction.degrade(this);
     }
 
-    public void primaryAction()
+    public void primaryAction(Character character, int direction, List<Entity> gameEntityList)
     {
-        primaryAction.use(this);
+        primaryAction.use(character, this, direction, gameEntityList);
     }
 
     public void dropAction()
