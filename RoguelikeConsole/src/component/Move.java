@@ -5,8 +5,22 @@ import base.Character;
 
 public class Move extends Base {
 
-    public void move(Character character, int direction)
+    //Should probably check for walls  at some point
+    public void move(Character character, int xOffset, int yOffset)
     {
+        log.info("Character moving with the following x and y offset:" + xOffset + "," + yOffset);
 
+        
+    }
+
+    private void updateCoordinates(Character character, int xOffset, int yOffset)
+    {
+        character.setxCoordinate(character.getxCoordinate() + xOffset);
+        character.setyCoordinate(character.getyCoordinate() + yOffset);
+    }
+
+    private boolean checkUserMoveDirection()
+    {
+        return true;
     }
 }
