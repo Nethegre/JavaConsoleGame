@@ -10,6 +10,11 @@ public class Base {
     protected LogManager log = new LogManager(id);
     protected int xCoordinate = 0, yCoordinate = 0;
 
+    public void setCoordinates(int x, int y) {
+        xCoordinate = x;
+        yCoordinate = y;
+    }
+
     public int getxCoordinate() {
         return xCoordinate;
     }
@@ -25,5 +30,4 @@ public class Base {
     public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
-    
 }
