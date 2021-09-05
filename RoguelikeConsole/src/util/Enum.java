@@ -14,4 +14,8 @@ public class Enum {
         LIGHT, HEAVY, AVERAGE, MENTAL
     }
 
+    public enum DisplayColor {
+        BLUE, GREEN, YELLOW, ORANGE, RED, BLACK, WHITE, GRAY, PURPLE
+    }
+
 }

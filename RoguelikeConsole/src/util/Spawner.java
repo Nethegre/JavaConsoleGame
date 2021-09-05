@@ -21,6 +21,8 @@ public class Spawner extends Base {
         zombie.addToArmorInventory(Enum.ArmorLocation.LEGS);
         zombie.addToArmorInventory(Enum.ArmorLocation.SHOES);
         zombie.addToArmorInventory(Enum.ArmorLocation.HAT);
+        zombie.setDisplayCharacter('Z');
+        zombie.setDisplayColor(Enum.DisplayColor.GREEN);
 
         return zombie;
     }

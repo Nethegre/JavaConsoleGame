@@ -1,5 +1,6 @@
 package base;
 
+import util.Enum;
 import util.LogManager;
 
 import java.util.UUID;
@@ -12,6 +13,8 @@ public class Base {
     protected int yCoordinate = 0;
     protected int prevXCoordinate = 0;
     protected int prevYCoordinate = 0;
+    protected char displayCharacter;
+    protected Enum.DisplayColor displayColor;
 
     public void setCoordinates(int x, int y) {
         xCoordinate = x;
@@ -58,4 +61,21 @@ public class Base {
     public void setPrevYCoordinate(int prevYCoordinate) {
         this.prevYCoordinate = prevYCoordinate;
     }
+
+    public char getDisplayCharacter() {
+        return displayCharacter;
+    }
+
+    public void setDisplayCharacter(char displayCharacter) {
+        this.displayCharacter = displayCharacter;
+    }
+
+    public Enum.DisplayColor getDisplayColor() {
+        return displayColor;
+    }
+
+    public void setDisplayColor(Enum.DisplayColor displayColor) {
+        this.displayColor = displayColor;
+    }
+
 }
