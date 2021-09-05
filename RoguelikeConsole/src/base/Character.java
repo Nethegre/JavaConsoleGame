@@ -14,7 +14,48 @@ public class Character extends Entity {
 
     public void move(int direction)
     {
-        move.move(this, direction);
+        int xOffset = 0, yOffset = 0;
+
+        switch (direction)
+        {
+            case 1:
+                xOffset = -1;
+                yOffset = 1;
+                break;
+            case 2:
+                yOffset = 1;
+                break;
+            case 3:
+                xOffset = 1;
+                yOffset = 1;
+                break;
+            case 4:
+                xOffset = -1;
+                break;
+            case 5:
+                break;
+            case 6:
+                xOffset = 1;
+                break;
+            case 7:
+                xOffset = -1;
+                yOffset = -1;
+                break;
+            case 8:
+                yOffset = -1;
+                break;
+            case 9:
+                xOffset = 1;
+                yOffset = -1;
+                break;
+        }
+
+        move.move(this, xOffset, yOffset);
+    }
+
+    public void move(int xOffset, int yOffset)
+    {
+        move.move(this, xOffset, yOffset);
     }
 
     public boolean equipArmor(Armor armor, Enum.ArmorLocation location)
