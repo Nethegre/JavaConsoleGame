@@ -23,6 +23,8 @@ public class Base {
     }
 
     public void setxCoordinate(int xCoordinate) {
+
+        this.prevXCoordinate = this.xCoordinate;
         this.xCoordinate = xCoordinate;
     }
 
@@ -31,6 +33,8 @@ public class Base {
     }
 
     public void setyCoordinate(int yCoordinate) {
+
+        this.prevYCoordinate = this.yCoordinate;
         this.yCoordinate = yCoordinate;
     }
 
