@@ -1,9 +1,8 @@
 package component;
 
-import base.Base;
 import base.Character;
 
-public class Move extends Base {
+public class Move extends Component {
 
     //Should probably check for walls  at some point
     public void move(Character character, int xOffset, int yOffset)

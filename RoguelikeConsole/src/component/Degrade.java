@@ -1,9 +1,8 @@
 package component;
 
-import base.Base;
 import base.Item;
 
-public class Degrade extends Base {
+public class Degrade extends Component {
 
     public void degrade(Item i)
     {

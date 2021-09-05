@@ -43,7 +43,7 @@ public class MeleAttackUse extends Use {
             }
             else
             {
-                log.error("Attempt to use a CharacterDamage component for a takingDmg entity that is not a character.");
+                log.error("Attempt to use a MeleAttackUse component for an item that is not a weapon.");
             }
         }
         catch (Exception ex)
@@ -53,40 +53,4 @@ public class MeleAttackUse extends Use {
         }
     }
 
-    private void translateDirectionToOffset(int direction, int xOffset, int yOffset)
-    {
-        switch (direction)
-        {
-            case 1:
-                xOffset = -1;
-                yOffset = 1;
-                break;
-            case 2:
-                yOffset = 1;
-                break;
-            case 3:
-                xOffset = 1;
-                yOffset = 1;
-                break;
-            case 4:
-                xOffset = -1;
-                break;
-            case 5:
-                break;
-            case 6:
-                xOffset = 1;
-                break;
-            case 7:
-                xOffset = -1;
-                yOffset = -1;
-                break;
-            case 8:
-                yOffset = -1;
-                break;
-            case 9:
-                xOffset = 1;
-                yOffset = -1;
-                break;
-        }
-    }
 }
