@@ -1,4 +1,4 @@
-package gui;
+package core;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
@@ -27,7 +27,7 @@ public class GameMap {
                 prevRandomInt = randomInt;
             }
 
-            gui.updateMap(gameMap);
+            gui.generateMapBase(gameMap);
             if (shouldSleep) {
                 Thread.sleep(2000);
             }
@@ -35,9 +35,6 @@ public class GameMap {
     }
 
     public void makeRoom(int topLeftCornerX, int topLeftCornerY, int bottomRightCornerX, int bottomRightCornerY) {
-        int roomWidth = bottomRightCornerX - topLeftCornerX;
-        int roomHeight = bottomRightCornerY - topLeftCornerY;
-
         for (int i = topLeftCornerY; i <= bottomRightCornerY; i++) {
             for (int j = topLeftCornerX; j <= bottomRightCornerX; j++) {
                 if (i == topLeftCornerY || i == bottomRightCornerY || j == topLeftCornerX || j == bottomRightCornerX) {

@@ -12,6 +12,7 @@ public class Entity extends Base {
     protected int inventorySize;
     protected Hashtable<Integer, InventoryEntry> inventory = new Hashtable<>();
     protected Damage damage;
+    public boolean needsUpdating = true;
 
     public boolean tryAddToInventory(Item item, double count, double remainder)
     {
