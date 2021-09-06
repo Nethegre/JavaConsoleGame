@@ -11,8 +11,10 @@ import java.util.List;
 public class MeleAttackUse extends Use {
 
     @Override
-    public void use(Character character, Item i, int direction, List<Entity> gameEntityList)
+    public String use(Character character, Item i, int direction, List<Entity> gameEntityList)
     {
+        String returnMessage = "";
+
         try
         {
             //Check to see if the current item is a weapon, if not than throw error
@@ -28,6 +30,7 @@ public class MeleAttackUse extends Use {
                 translateDirectionToOffset(direction, xOffset, yOffset);
                 attackingX = character.getxCoordinate() + xOffset;
                 attackingY = character.getyCoordinate() + yOffset;
+                boolean hitSomething = false;
 
                 //Check for any entity at the attacking coordinates
                 for (Entity e : gameEntityList)
@@ -36,21 +39,33 @@ public class MeleAttackUse extends Use {
                     {
                         //We found something that will be hit, apply damage
                         e.takeDamage(character, 1, weapon);
+                        returnMessage = "you swing your " + weapon.getDisplayName() + " at a " + e.getDisplayName();
+                        hitSomething = true;
 
                         break; //Don't check any further as we hit what we were going to
                     }
+                }
+
+                if (!hitSomething)
+                {
+                    //Return a generic miss message
+                    returnMessage = "you swing your " + weapon.getDisplayName() + " at nothing";
                 }
             }
             else
             {
                 log.error("Attempt to use a MeleAttackUse component for an item that is not a weapon.");
+                returnMessage = "Error while attacking";
             }
         }
         catch (Exception ex)
         {
             log.error("Exception performing meleAttackUse. [" + ex.getMessage() + "]");
             ex.printStackTrace();
+            returnMessage = "Error while attacking";
         }
+
+        return returnMessage;
     }
 
 }

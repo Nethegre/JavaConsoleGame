@@ -12,7 +12,6 @@ public class Entity extends Base {
     protected int inventoryMaxSize;
     protected Hashtable<Integer, InventoryEntry> inventory = new Hashtable<>();
     protected Damage damage;
-    protected boolean needsUpdating = true;
     protected boolean takesWholeTile = true;
 
     public boolean tryAddToInventory(Item item, double count, double remainder)
@@ -136,14 +135,6 @@ public class Entity extends Base {
 
     public void setDamage(Damage damage) {
         this.damage = damage;
-    }
-
-    public boolean isNeedsUpdating() {
-        return needsUpdating;
-    }
-
-    public void setNeedsUpdating(boolean needsUpdating) {
-        this.needsUpdating = needsUpdating;
     }
 
     public boolean isTakesWholeTile() {

@@ -32,19 +32,19 @@ public class Item extends Base {
         }
     }
 
-    public void degradeAction()
+    public String degradeAction()
     {
-        degradeAction.degrade(this);
+        return degradeAction.degrade(this);
     }
 
-    public void primaryAction(Character character, int direction, List<Entity> gameEntityList)
+    public String primaryAction(Character character, int direction, List<Entity> gameEntityList)
     {
-        primaryAction.use(character, this, direction, gameEntityList);
+        return primaryAction.use(character, this, direction, gameEntityList);
     }
 
-    public void dropAction()
+    public String dropAction(Entity entity)
     {
-        dropAction.drop(this);
+        return dropAction.drop(entity, this);
     }
 
     public int getMaxStackSize() {
