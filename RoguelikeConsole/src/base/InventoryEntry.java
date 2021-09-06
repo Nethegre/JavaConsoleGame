@@ -40,7 +40,7 @@ public class InventoryEntry extends Base {
     public boolean isType(Item i)
     {
         //Check to see if the types are the same as what is currently stored
-        return this.item.getClass().equals(i.getClass());
+        return this.item.getDisplayName().equals(i.getDisplayName());
     }
 
     public boolean tryAddItem(Item item, double count, double remaining)

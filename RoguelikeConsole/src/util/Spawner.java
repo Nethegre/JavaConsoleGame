@@ -1,11 +1,10 @@
 package util;
 
-import base.Base;
 import base.Character;
 import component.CharacterDamage;
 import component.Move;
 
-public class Spawner extends Base {
+public class Spawner {
 
     //This class will spawn classes
     public Character createZombie()
