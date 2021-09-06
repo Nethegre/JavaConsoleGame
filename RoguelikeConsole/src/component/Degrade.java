@@ -6,23 +6,23 @@ public class Degrade extends Component {
 
     public void degrade(Item i)
     {
-        if (i.degradable)
+        if (i.isDegradable())
         {
-            i.degrade -= 1;
+            i.setDegrade(-1);
 
-            if (i.degrade <= 0)
+            if (i.getDegrade() <= 0)
             {
-                i.degraded = true;
-                i.degrade = 0;
+                i.setDegraded(true);
+                i.setDegrade(0);
             }
             else
             {
-                i.degraded = false;
+                i.setDegraded(false);
             }
         }
         else
         {
-            log.info("Item " + i.displayName + " is not degradable.");
+            log.info("Item " + i.getDisplayName() + " is not degradable.");
         }
     }
 }

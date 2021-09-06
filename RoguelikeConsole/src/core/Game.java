@@ -11,7 +11,7 @@ public class Game {
     private GUI gui;
     private GameMap gameMap;
     private Spawner spawner = new Spawner();
-    private ArrayList<Entity> entities = new ArrayList<>();
+    public static ArrayList<Entity> entities = new ArrayList<>();
 
     public Game() {
         Character playerCharacter = spawnCharacter("player", 3, 3);

@@ -1,9 +1,12 @@
 package core.SwingActions;
 
 import base.Character;
+import base.Entity;
+import core.Game;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class MoveAction extends AbstractAction {
     private Character character;
@@ -16,6 +19,6 @@ public class MoveAction extends AbstractAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        character.move(xOffset, yOffset);
+        character.move(xOffset, yOffset, Game.entities);
     }
 }
