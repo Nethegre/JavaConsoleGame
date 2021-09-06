@@ -9,15 +9,16 @@ public class Entity extends Base {
     protected double baseHealth;
     protected double baseArmor;
     protected boolean damageable;
-    protected int inventorySize;
+    protected int inventoryMaxSize;
     protected Hashtable<Integer, InventoryEntry> inventory = new Hashtable<>();
     protected Damage damage;
     protected boolean needsUpdating = true;
+    protected boolean takesWholeTile = true;
 
     public boolean tryAddToInventory(Item item, double count, double remainder)
     {
         //Try to add to the existing entries
-        for (Integer key = 0; key <= this.inventorySize -1; key ++)
+        for (Integer key = 0; key <= this.inventoryMaxSize -1; key ++)
         {
             if (inventory.containsKey(key)) //Makes sure that the inventory slot has items in it
             {
@@ -36,7 +37,7 @@ public class Entity extends Base {
             }
         }
         //Try to add to the empty inventory slots because there was remainder
-        for (int i = 0; i <= this.inventorySize -1; i ++)
+        for (int i = 0; i <= this.inventoryMaxSize -1; i ++)
         {
             if (!inventory.containsKey(i))
             {
@@ -117,12 +118,20 @@ public class Entity extends Base {
         this.damageable = damageable;
     }
 
-    public int getInventorySize() {
-        return inventorySize;
+    public int getInventoryMaxSize() {
+        return inventoryMaxSize;
     }
 
-    public void setInventorySize(int inventorySize) {
-        this.inventorySize = inventorySize;
+    public int getInventorySize() {
+        return inventory.size();
+    }
+
+    public void setInventoryMaxSize(int inventoryMaxSize) {
+        this.inventoryMaxSize = inventoryMaxSize;
+    }
+
+    public Hashtable<Integer, InventoryEntry> getInventory() {
+        return inventory;
     }
 
     public void setDamage(Damage damage) {
@@ -135,6 +144,14 @@ public class Entity extends Base {
 
     public void setNeedsUpdating(boolean needsUpdating) {
         this.needsUpdating = needsUpdating;
+    }
+
+    public boolean isTakesWholeTile() {
+        return takesWholeTile;
+    }
+
+    public void setTakesWholeTile(boolean takesWholeTile) {
+        this.takesWholeTile = takesWholeTile;
     }
 
 }

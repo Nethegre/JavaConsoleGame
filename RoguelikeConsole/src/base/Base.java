@@ -17,6 +17,7 @@ public class Base {
     protected int prevYCoordinate = 0;
     protected char displayCharacter;
     protected Enum.DisplayColor displayColor = Enum.DisplayColor.WHITE;
+    protected String displayName;
 
     public void setCoordinates(int x, int y) {
         xCoordinate = x;
@@ -86,4 +87,13 @@ public class Base {
 
         return attributeSet;
     }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
 }

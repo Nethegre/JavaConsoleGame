@@ -4,6 +4,7 @@ import component.Move;
 import util.Enum;
 
 import java.util.Hashtable;
+import java.util.List;
 
 public class Character extends Entity {
 
@@ -12,7 +13,7 @@ public class Character extends Entity {
     protected boolean supportsArmor;
     protected int charisma, intelligence, strength, dexterity, constitution, wisdom;
 
-    public void move(int direction)
+    public void move(int direction, List<Entity> gameEntityList)
     {
         int xOffset = 0, yOffset = 0;
 
@@ -50,12 +51,12 @@ public class Character extends Entity {
                 break;
         }
 
-        move.move(this, xOffset, yOffset);
+        move.move(this, xOffset, yOffset, gameEntityList);
     }
 
-    public void move(int xOffset, int yOffset)
+    public void move(int xOffset, int yOffset, List<Entity> gameEntityList)
     {
-        move.move(this, xOffset, yOffset);
+        move.move(this, xOffset, yOffset, gameEntityList);
     }
 
     public boolean equipArmor(Armor armor, Enum.ArmorLocation location)
