@@ -18,6 +18,7 @@ public class Base {
     protected char displayCharacter;
     protected Enum.DisplayColor displayColor = Enum.DisplayColor.WHITE;
     protected String displayName;
+    protected boolean needsUpdating = true;
 
     public void setCoordinates(int x, int y) {
         xCoordinate = x;
@@ -94,6 +95,14 @@ public class Base {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public boolean isNeedsUpdating() {
+        return needsUpdating;
+    }
+
+    public void setNeedsUpdating(boolean needsUpdating) {
+        this.needsUpdating = needsUpdating;
     }
 
 }

@@ -4,8 +4,10 @@ import base.Item;
 
 public class Degrade extends Component {
 
-    public void degrade(Item i)
+    public String degrade(Item i)
     {
+        String returnMessage = "";
+
         if (i.isDegradable())
         {
             i.setDegrade(-1);
@@ -14,6 +16,7 @@ public class Degrade extends Component {
             {
                 i.setDegraded(true);
                 i.setDegrade(0);
+                returnMessage = "your " + i.getDisplayName() + " seems to be worn out from use";
             }
             else
             {
@@ -24,5 +27,7 @@ public class Degrade extends Component {
         {
             log.info("Item " + i.getDisplayName() + " is not degradable.");
         }
+
+        return returnMessage;
     }
 }

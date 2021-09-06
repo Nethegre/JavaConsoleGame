@@ -2,6 +2,7 @@ package core;
 
 import base.Character;
 import base.Entity;
+import base.Item;
 import util.Spawner;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Game {
     private GameMap gameMap;
     private Spawner spawner = new Spawner();
     public static ArrayList<Entity> entities = new ArrayList<>();
+    public static ArrayList<Item> mapItems = new ArrayList<>();
 
     public Game() {
         Character playerCharacter = spawnCharacter("player", 3, 3);

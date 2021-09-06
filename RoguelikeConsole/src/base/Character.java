@@ -94,7 +94,7 @@ public class Character extends Entity {
                     else
                     {
                         //Need to drop the previously equipped armor because the character can't store it in their inventory
-                        removedArmor.dropAction();
+                        removedArmor.dropAction(this);
                         log.info("Equipped the characters " + location + " armor and dropped the existing armor because they couldn't store it in their inventory.");
                         success = true;
                     }
@@ -146,7 +146,7 @@ public class Character extends Entity {
                     else
                     {
                         //Need to drop the previously equipped armor because the character can't store it in their inventory
-                        removedArmor.dropAction();
+                        removedArmor.dropAction(this);
                         log.info("Dequipped the characters " + location + " armor and dropped itr because they couldn't store it in their inventory.");
                         success = true;
                     }

@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Move extends Component {
 
-    //Should probably check for walls  at some point
-    public void move(Character character, int xOffset, int yOffset, List<Entity> gameEntityList)
+    public String move(Character character, int xOffset, int yOffset, List<Entity> gameEntityList)
     {
+        String returnMessage = "";
 
         //Check if the character is actually moving
         if (xOffset != 0 || yOffset != 0)
@@ -27,13 +27,17 @@ public class Move extends Component {
             {
                 //Character was not able to move due to something in the way
                 log.info("Character was unable to move due to " + blockingEntityName + " being in the way.");
+                returnMessage = "you were not able to move because " + blockingEntityName + " was in the way";
             }
         }
         else
         {
             //Character is not actually moving anywhere
             log.info("Character stood still for a turn.");
+            returnMessage = "you stand still for a moment";
         }
+
+        return returnMessage;
     }
 
     private void updateCoordinates(Character character, int xCoordinate, int yCoordinate)

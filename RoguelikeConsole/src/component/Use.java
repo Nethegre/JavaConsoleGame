@@ -8,9 +8,10 @@ import java.util.List;
 
 public abstract class Use extends Component {
 
-    public void use(Character character, Item i, int direction, List<Entity> gameEntityList)
+    public String use(Character character, Item i, int direction, List<Entity> gameEntityList)
     {
-
+        String returnMessage = "";
+        return returnMessage;
     }
 
     protected void translateDirectionToOffset(int direction, int xOffset, int yOffset)
