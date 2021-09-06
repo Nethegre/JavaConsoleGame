@@ -13,7 +13,7 @@ public class Character extends Entity {
     protected boolean supportsArmor;
     protected int charisma, intelligence, strength, dexterity, constitution, wisdom;
 
-    public void move(int direction, List<Entity> gameEntityList)
+    public String move(int direction, List<Entity> gameEntityList)
     {
         int xOffset = 0, yOffset = 0;
 
@@ -51,12 +51,12 @@ public class Character extends Entity {
                 break;
         }
 
-        move.move(this, xOffset, yOffset, gameEntityList);
+        return move.move(this, xOffset, yOffset, gameEntityList);
     }
 
-    public void move(int xOffset, int yOffset, List<Entity> gameEntityList)
+    public String move(int xOffset, int yOffset, List<Entity> gameEntityList)
     {
-        move.move(this, xOffset, yOffset, gameEntityList);
+        return move.move(this, xOffset, yOffset, gameEntityList);
     }
 
     public boolean equipArmor(Armor armor, Enum.ArmorLocation location)

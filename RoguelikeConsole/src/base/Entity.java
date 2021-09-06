@@ -88,9 +88,9 @@ public class Entity extends Base {
         }
     }
 
-    public void takeDamage(Entity attacking, int attackTimes, Weapon weapon)
+    public String takeDamage(Entity attacking, int attackTimes, Weapon weapon)
     {
-        damage.damage(attacking, this, attackTimes, weapon);
+        return damage.damage(attacking, this, attackTimes, weapon);
     }
 
     public double getBaseHealth() {
