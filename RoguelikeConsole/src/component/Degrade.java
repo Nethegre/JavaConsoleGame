@@ -1,6 +1,7 @@
 package component;
 
 import base.Item;
+import core.PlayerMessageOutput;
 
 public class Degrade extends Component {
 
@@ -28,6 +29,7 @@ public class Degrade extends Component {
             log.info("Item " + i.getDisplayName() + " is not degradable.");
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 }

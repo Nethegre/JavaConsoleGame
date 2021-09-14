@@ -4,6 +4,7 @@ import base.Character;
 import base.Entity;
 import base.Item;
 import base.Weapon;
+import core.PlayerMessageOutput;
 
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class MeleAttackUse extends Use {
             returnMessage = "Error while attacking";
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 

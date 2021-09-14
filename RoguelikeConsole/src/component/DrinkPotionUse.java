@@ -4,6 +4,7 @@ import base.Character;
 import base.Entity;
 import base.Item;
 import base.Potion;
+import core.PlayerMessageOutput;
 import util.Enum;
 
 import java.util.List;
@@ -98,6 +99,7 @@ public class DrinkPotionUse extends Use {
             }
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 

@@ -2,6 +2,7 @@ package component;
 
 import base.Character;
 import base.Entity;
+import core.PlayerMessageOutput;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class Move extends Component {
             returnMessage = "you stand still for a moment";
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 

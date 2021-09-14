@@ -4,6 +4,7 @@ import base.Armor;
 import base.Character;
 import base.Entity;
 import base.Weapon;
+import core.PlayerMessageOutput;
 import util.ConfigManager;
 import util.Enum;
 
@@ -165,6 +166,7 @@ public class HeavyOnlyDamage extends Damage {
             returnMessage = "Error while assigning damage to " + takingDmg.getDisplayName();
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 }

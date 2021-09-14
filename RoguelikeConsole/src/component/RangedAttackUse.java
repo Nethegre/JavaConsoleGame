@@ -4,6 +4,7 @@ import base.Character;
 import base.Entity;
 import base.Item;
 import base.Ranged;
+import core.PlayerMessageOutput;
 
 import java.util.List;
 
@@ -74,6 +75,7 @@ public class RangedAttackUse extends Use {
             returnMessage = "Error while attacking";
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 

@@ -3,6 +3,7 @@ package component;
 import base.Entity;
 import base.Item;
 import core.Game;
+import core.PlayerMessageOutput;
 
 //Normal drop action with the item ending up where the item was dropped
 public class Drop extends Component {
@@ -32,6 +33,7 @@ public class Drop extends Component {
             returnMessage = "Error while dropping item.";
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 }

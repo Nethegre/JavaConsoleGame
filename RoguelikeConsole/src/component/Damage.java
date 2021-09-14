@@ -2,6 +2,7 @@ package component;
 
 import base.Entity;
 import base.Weapon;
+import core.PlayerMessageOutput;
 
 //Basic damage component, doesn't consider armor, probably don't use
 public class Damage extends Component {
@@ -33,6 +34,7 @@ public class Damage extends Component {
             returnMessage = "Error while assigning damage to " + defending.getDisplayName() + ".";
         }
 
+        PlayerMessageOutput.addToPlayerMessageOutputBuffer(returnMessage);
         return returnMessage;
     }
 
