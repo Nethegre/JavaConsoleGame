@@ -37,43 +37,43 @@ public class DrinkPotionUse extends Use {
                     {
                         case CHA:
                         {
-                            modifierMessage += formatPotionModifierMesssage(modifierCount, "charismatic", p.getPotionModifier().get(trait));
+                            modifierMessage += formatPotionModifierMessage(modifierCount, "charismatic", p.getPotionModifier().get(trait));
                             character.setCharisma(character.getCharisma() + p.getPotionModifier().get(trait));
                             break;
                         }
                         case INT:
                         {
-                            modifierMessage += formatPotionModifierMesssage(modifierCount, "intelligent", p.getPotionModifier().get(trait));
+                            modifierMessage += formatPotionModifierMessage(modifierCount, "intelligent", p.getPotionModifier().get(trait));
                             character.setIntelligence(character.getIntelligence() + p.getPotionModifier().get(trait));
                             break;
                         }
                         case CON:
                         {
-                            modifierMessage += formatPotionModifierMesssage(modifierCount, "sturdy", p.getPotionModifier().get(trait));
+                            modifierMessage += formatPotionModifierMessage(modifierCount, "sturdy", p.getPotionModifier().get(trait));
                             character.setConstitution(character.getConstitution() + p.getPotionModifier().get(trait));
                             break;
                         }
                         case STR:
                         {
-                            modifierMessage += formatPotionModifierMesssage(modifierCount, "strong", p.getPotionModifier().get(trait));
+                            modifierMessage += formatPotionModifierMessage(modifierCount, "strong", p.getPotionModifier().get(trait));
                             character.setStrength(character.getStrength() + p.getPotionModifier().get(trait));
                             break;
                         }
                         case DEX:
                         {
-                            modifierMessage += formatPotionModifierMesssage(modifierCount, "dexterous", p.getPotionModifier().get(trait));
+                            modifierMessage += formatPotionModifierMessage(modifierCount, "dexterous", p.getPotionModifier().get(trait));
                             character.setDexterity(character.getDexterity() + p.getPotionModifier().get(trait));
                             break;
                         }
                         case WIS:
                         {
-                            modifierMessage += formatPotionModifierMesssage(modifierCount, "wise", p.getPotionModifier().get(trait));
+                            modifierMessage += formatPotionModifierMessage(modifierCount, "wise", p.getPotionModifier().get(trait));
                             character.setWisdom(character.getWisdom() + p.getPotionModifier().get(trait));
                             break;
                         }
                         case HEALTH:
                         {
-                            modifierMessage += formatPotionModifierMesssage(modifierCount, "healthy", p.getPotionModifier().get(trait));
+                            modifierMessage += formatPotionModifierMessage(modifierCount, "healthy", p.getPotionModifier().get(trait));
                             character.setBaseHealth(character.getBaseHealth() + p.getPotionModifier().get(trait));
                             break;
                         }
@@ -101,7 +101,7 @@ public class DrinkPotionUse extends Use {
         return returnMessage;
     }
 
-    private String formatPotionModifierMesssage(int modifierCount, String text, int modifierAmount)
+    private String formatPotionModifierMessage(int modifierCount, String text, int modifierAmount)
     {
         String returnMessage = "";
 
