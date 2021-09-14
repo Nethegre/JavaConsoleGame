@@ -124,6 +124,9 @@ public class CharacterDamage extends Damage {
                             //Apply damage to defending entity
                             defending.setBaseHealth(defending.getBaseHealth() - totalDamage);
 
+                            //Run the degrade action against the weapon used in the attack
+                            log.info(weapon.degradeAction());
+
                             //Check for critical damage to modify return message
                             if (crit)
                             {

@@ -37,4 +37,8 @@ public class Enum {
         }
     }
 
+    public enum PotionModifier {
+        WIS, DEX, STR, CON, INT, CHA, HEALTH, MANA //Not yet implemented or used
+    }
+
 }
