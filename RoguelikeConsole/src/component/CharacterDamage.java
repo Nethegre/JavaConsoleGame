@@ -26,7 +26,7 @@ public class CharacterDamage extends Damage {
     @Override
     public String damage(Entity givingDmg, Entity takingDmg, int attackTimes, Weapon weapon)
     {
-        String returnMessage;
+        String returnMessage = "";
 
         try
         {
@@ -76,61 +76,65 @@ public class CharacterDamage extends Damage {
                                 toHit *= (attacking.getDexterity() * .05) + (attacking.getStrength() * .05) + 1;
                         }
 
-                        //Determine if the attack hits or not include randomization
-                        double randomizedHitMult = Math.random();
-                        boolean crit = false;
+                        //Loop based on the number of times attacking
+                        for ( int n = 0; n < attackTimes; n++ )
+                        {
+                            //Determine if the attack hits or not include randomization
+                            double randomizedHitMult = Math.random();
+                            boolean crit = false;
 
-                        //Check for randomized crit
-                        if (randomizedHitMult > criticalHitPercent)
-                        {
-                            //Skip straight to damage because it is a crit
-                            crit = true;
-                        }
-                        else
-                        {
-                            //Check to see if the attack hits
-                            if (toHit * randomizedHitMult < armorRating)
+                            //Check for randomized crit
+                            if (randomizedHitMult > criticalHitPercent)
                             {
-                                //Attack doesn't hit
-                                return attacking.getDisplayName() + " failed to hit " + defending.getDisplayName() + " with a " + weapon.getDisplayName();
+                                //Skip straight to damage because it is a crit
+                                crit = true;
                             }
-                        }
-
-                        //the attack hits, time to calculate the damage
-                        //Randomized damage number is rolled
-                        double randomzedDmgMult = Math.random();
-                        double totalDamage;
-
-                        if (crit)
-                        {
-                            //Damage reduction is ignored and damage is doubled
-                            totalDamage = weapon.getDamage() * randomzedDmgMult * 2;
-                        }
-                        else
-                        {
-                            //Make sure dmgReduction can't be more than configured amount
-                            if (dmgReduction > damageReductionMax)
+                            else
                             {
-                                dmgReduction = damageReductionMax;
+                                //Check to see if the attack hits
+                                if (toHit * randomizedHitMult < armorRating)
+                                {
+                                    //Attack doesn't hit
+                                    return attacking.getDisplayName() + " failed to hit " + defending.getDisplayName() + " with a " + weapon.getDisplayName();
+                                }
                             }
 
-                            //Damage reduction reduces the damage by a percent
-                            totalDamage = (weapon.getDamage() * randomzedDmgMult) * (1 - dmgReduction);
-                        }
+                            //the attack hits, time to calculate the damage
+                            //Randomized damage number is rolled
+                            double randomzedDmgMult = Math.random();
+                            double totalDamage;
 
-                        //Apply damage to defending entity
-                        defending.setBaseHealth(defending.getBaseHealth() - totalDamage);
+                            if (crit)
+                            {
+                                //Damage reduction is ignored and damage is doubled
+                                totalDamage = weapon.getDamage() * randomzedDmgMult * 2;
+                            }
+                            else
+                            {
+                                //Make sure dmgReduction can't be more than configured amount
+                                if (dmgReduction > damageReductionMax)
+                                {
+                                    dmgReduction = damageReductionMax;
+                                }
 
-                        //Check for critical damage to modify return message
-                        if (crit)
-                        {
-                            returnMessage = defending.getDisplayName() + " took " + totalDamage + " critical damage from " + attacking.getDisplayName() + " using a " + weapon.getDisplayName();
+                                //Damage reduction reduces the damage by a percent
+                                totalDamage = (weapon.getDamage() * randomzedDmgMult) * (1 - dmgReduction);
+                            }
+
+                            //Apply damage to defending entity
+                            defending.setBaseHealth(defending.getBaseHealth() - totalDamage);
+
+                            //Check for critical damage to modify return message
+                            if (crit)
+                            {
+                                returnMessage = defending.getDisplayName() + " took " + totalDamage + " critical damage from " + attacking.getDisplayName() + " using a " + weapon.getDisplayName();
+                            }
+                            else
+                            {
+                                returnMessage = generateFormattedMsg(attacking, defending, weapon, totalDamage);
+                            }
+                            log.info(returnMessage);
                         }
-                        else
-                        {
-                            returnMessage = generateFormattedMsg(attacking, defending, weapon, totalDamage);
-                        }
-                        log.info(returnMessage);
                     }
                     else
                     {
